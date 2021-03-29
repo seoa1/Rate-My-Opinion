@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
@@ -19,10 +20,10 @@ connection.once('open', () => {
 
 //routes
 const homeRouter = require('./routes/home');
-const loginRouter = require('./routes/login');
+const userRouter = require('./routes/user');
 
 app.use('/', homeRouter);
-app.use('/login', loginRouter);
+app.use('/user', userRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
