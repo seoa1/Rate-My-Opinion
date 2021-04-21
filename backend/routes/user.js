@@ -2,6 +2,14 @@ const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 
+router.get('/', (req, res) => {
+    User.find({})
+        .then((data) => {
+            res.json(data);
+        })
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
 router.post('/login', (req, res) => {
     User.findOne({ username: req.body.username }, (err, user) => {
         if (err) throw err;
@@ -23,7 +31,12 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-    const newUser = new User({ username: req.body.username, password: req.body.password });
+    const newUser = new User({ 
+        username: req.body.username, 
+        password: req.body.password,
+        comments: [],
+        posts: [] 
+    });
     newUser.save() //saves user to mongodb database
         .then(() => res.json('User added!'))
         .catch(err => res.status(400).json('Error: ' + err));
