@@ -5,8 +5,7 @@ const jwt = require('jsonwebtoken');
 router.get('/', verifyToken, (req, res) => {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (err) {
-            console.log(err);
-            res.redirect('/user/login');
+            res.status(401).json("Error: "+err);
         }
         else {
             res.json(authData);
