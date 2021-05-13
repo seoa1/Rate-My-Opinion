@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 export default class Home extends Component {
     constructor(props){
@@ -7,25 +8,32 @@ export default class Home extends Component {
 
         this.state = {
         }
+        this.logout = this.logout.bind(this);
     }
     componentDidMount() {
-        console.log(localStorage.getItem('token'));
         axios.get("home")
             .then(res => {
                 console.log(res);
             })
             .catch(err => {
-                console.log(err.response.status);
                 if (err.response.status === 401) {
-                    window.location = '/';
+                    window.location = '/login';
                 }
                 console.log(err);
             });
     }
 
+    logout(e) {
+        e.preventDefault();
+        localStorage.setItem('token', '');
+        window.location = '/';
+    }
+
     render() {
         return(
-            <div>Hello</div>
+            <div>Hello
+                <Link to="/" onClick={this.logout}>Logout</Link>
+            </div>
         )
     }
 }
