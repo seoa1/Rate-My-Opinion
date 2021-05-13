@@ -16,7 +16,7 @@ export default class Home extends Component {
                 console.log(res);
             })
             .catch(err => {
-                if (err.response.status === 401) {
+                if (err.response && err.response.status === 401) {
                     window.location = '/login';
                 }
                 console.log(err);
@@ -31,7 +31,8 @@ export default class Home extends Component {
 
     render() {
         return(
-            <div>Hello
+            <div>
+                Hello<br/>
                 <Link to="/" onClick={this.logout}>Logout</Link>
             </div>
         )

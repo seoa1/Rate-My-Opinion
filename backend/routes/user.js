@@ -17,6 +17,11 @@ router.post('/login', (req, res) => {
     User.findOne({ username: req.body.username }, (err, user) => {
         if (err) throw err;
 
+        if (!user) {
+            res.status(401).json('Error: ' + err);
+            return;
+        }
+
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (err) throw err;
 

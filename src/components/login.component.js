@@ -8,7 +8,8 @@ export default class Login extends Component {
 
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            incorrect: false
         }
 
         this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -41,7 +42,13 @@ export default class Login extends Component {
                 localStorage.setItem('token', res.data.token);
                 window.location = '/';
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                this.setState({
+                    username: "",
+                    password: "",
+                    incorrect: true
+                });
+            });
     }
 
     render() {
@@ -55,6 +62,7 @@ export default class Login extends Component {
                     <input type="text" password="password" name="password" value={this.state.password} onChange={this.onChangePassword}/><br/>
                     <input type="submit" value="Submit"/>
                 </form>
+                {this.state.incorrect ? <p><br/>User not found!</p> : <p><br/><br/></p>}
                 <Link to="/user/create" className="nav-link">Create User</Link>
                 <Link exact="true" to="/" className="nav-link">Home</Link>
             </div>
