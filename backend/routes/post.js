@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-    User.findOne({ username: req.body.user })
+    User.findById(req.body.id)
         .then(user => {
             const newPost = new Post({ 
             author: user._id, 

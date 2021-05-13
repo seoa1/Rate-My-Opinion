@@ -27,7 +27,7 @@ router.post('/login', (req, res) => {
 
             if (isMatch) {
                 jwt.sign({ user: req.body.username }, 'secretkey', (err, token) => {
-                    res.json({ token });
+                    res.json({ token, id: user._id });
                 })
             }
         })

@@ -26,6 +26,7 @@ export default class Home extends Component {
     logout(e) {
         e.preventDefault();
         localStorage.setItem('token', '');
+        localStorage.setItem('userid', '');
         window.location = '/';
     }
 
@@ -34,6 +35,8 @@ export default class Home extends Component {
             <div>
                 Hello<br/>
                 <Link to="/" onClick={this.logout}>Logout</Link>
+                <br/>
+                <Link to="/posts/create">Create Post</Link>
             </div>
         )
     }

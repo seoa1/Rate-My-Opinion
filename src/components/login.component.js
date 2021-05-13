@@ -40,6 +40,7 @@ export default class Login extends Component {
         axios.post("user/login", login)
             .then(res => {
                 localStorage.setItem('token', res.data.token);
+                localStorage.setItem('userid', res.data.id);
                 window.location = '/';
             })
             .catch(err => {
@@ -62,7 +63,7 @@ export default class Login extends Component {
                     <input type="text" password="password" name="password" value={this.state.password} onChange={this.onChangePassword}/><br/>
                     <input type="submit" value="Submit"/>
                 </form>
-                {this.state.incorrect ? <p><br/>User not found!</p> : <p><br/><br/></p>}
+                {this.state.incorrect ? <p style={{color: "red"}}><br/>User not found!</p> : <p><br/><br/></p>}
                 <Link to="/user/create" className="nav-link">Create User</Link>
                 <Link exact="true" to="/" className="nav-link">Home</Link>
             </div>
