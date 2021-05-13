@@ -22,7 +22,7 @@ const homeRouter = require('./routes/home');
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
 
-app.use('/', homeRouter);
+app.use('/home', homeRouter);
 app.use('/user', userRouter);
 app.use('/posts', postRouter);
 

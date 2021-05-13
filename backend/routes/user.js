@@ -2,12 +2,15 @@ const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 
-router.get('/', (req, res) => {
-    User.find({})
-        .then((data) => {
-            res.json(data);
-        })
-        .catch(err => res.status(400).json('Error: ' + err));
+router.post('/', (req, res) => {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (err) {
+            res.status(401).json("Error: "+err);
+        }
+        else {
+            res.json(authData);
+        }
+    })
 })
 
 router.post('/login', (req, res) => {
@@ -32,7 +35,7 @@ router.get('/login', (req, res) => {
 
 router.post('/create', (req, res) => {
     const newUser = new User({ 
-        username: req.body.username, 
+        username: req.body.username,
         password: req.body.password,
         comments: [],
         posts: [] 

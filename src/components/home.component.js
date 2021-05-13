@@ -6,18 +6,21 @@ export default class Home extends Component {
         super(props);
 
         this.state = {
-
         }
     }
     componentDidMount() {
-        axios.get("http://localhost:5000/")
+        console.log(localStorage.getItem('token'));
+        axios.get("home")
             .then(res => {
                 console.log(res);
             })
             .catch(err => {
+                console.log(err.response.status);
+                if (err.response.status === 401) {
+                    window.location = '/';
+                }
                 console.log(err);
             });
-        console.log("here")
     }
 
     render() {

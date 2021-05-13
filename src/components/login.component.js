@@ -36,14 +36,17 @@ export default class Login extends Component {
             password: this.state.password
         }
 
-        axios.post("http://localhost:5000/user/login", login)
-            .then(res => console.log(res.data))
+        axios.post("user/login", login)
+            .then(res => {
+                localStorage.setItem('token', res.data.token);
+            })
             .catch(err => console.log(err));
     }
 
     render() {
         return( 
             <div>
+                <h2>Login</h2>
                 <form onSubmit={this.checkLogin}>
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" value={this.state.username} onChange={this.onChangeUsername}/><br/>
@@ -51,7 +54,8 @@ export default class Login extends Component {
                     <input type="text" password="password" name="password" value={this.state.password} onChange={this.onChangePassword}/><br/>
                     <input type="submit" value="Submit"/>
                 </form>
-                <Link to="/user/create" >Create User</Link>
+                <Link to="/user/create" className="nav-link">Create User</Link>
+                <Link exact="true" to="/" className="nav-link">Home</Link>
             </div>
         )
     }
