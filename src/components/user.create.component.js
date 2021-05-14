@@ -26,11 +26,12 @@ export default class CreateUser extends Component {
 
         axios.post("user", newUser)
             .then(res => {
-                if (!res.data) {
+                console.log(res.data);
+                if (!res.data.found) {
                     // if username not found
                     axios.post("user/create", newUser)
-                        .then(res => console.log(res))
-                        .catch(err => console.log(err))
+                        .then(res => window.location = '/')
+                        .catch(err => console.log(err));
                 }
             })
             .catch(err => console.log(err));

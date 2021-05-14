@@ -3,12 +3,14 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 
 router.post('/', (req, res) => {
-    jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (err) {
-            res.status(401).json("Error: "+err);
+    User.findOne({ username: req.body.username }, (err, user) => {
+        if (err) throw err;
+
+        if (!user) {
+            res.json({found: false});
         }
         else {
-            res.json(authData);
+            res.json({found: true});
         }
     })
 })
