@@ -16,7 +16,6 @@ export default class Home extends Component {
     componentDidMount() {
         axios.get("home")
             .then(res => {
-                console.log(res);
                 axios.get("posts")
                     .then(res => {
                         this.setState({
@@ -47,7 +46,6 @@ export default class Home extends Component {
     }
 
     deletePost(i, id) {
-        console.log(i, id);
         const input = {
             id
         }
