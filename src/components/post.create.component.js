@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 export default class CreatePost extends Component {
     constructor(props) {
@@ -51,6 +52,7 @@ export default class CreatePost extends Component {
                     <textarea style={{width: "100%", height: "500px"}} type="text" id="post_body" name="post_body" value={this.state.post_body} onChange={this.onChangePostBody}/><br/>
                     <input type="submit" value="Submit"/>
                 </form>
+                <Link exact={true} to="/" className="nav-link">Home</Link>
             </div>
         )
     }

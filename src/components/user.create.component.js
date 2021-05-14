@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 export default class CreateUser extends Component {
     constructor(props) {
@@ -58,6 +59,7 @@ export default class CreateUser extends Component {
                     <input type="text" password="password" name="password" value={this.state.password} onChange={this.onChangePassword}/><br/>
                     <input type="submit" value="Submit"/>
                 </form>
+                <Link exact="true" to="/" className="nav-link">Home</Link>
             </div>
         )
     }

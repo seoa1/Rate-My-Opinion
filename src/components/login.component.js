@@ -39,6 +39,7 @@ export default class Login extends Component {
 
         axios.post("user/login", login)
             .then(res => {
+                console.log(res.data);
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('userid', res.data.id);
                 window.location = '/';

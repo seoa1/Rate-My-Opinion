@@ -21,11 +21,10 @@ router.post('/login', (req, res) => {
             res.status(401).json('Error: ' + err);
             return;
         }
-
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (err) throw err;
-
             if (isMatch) {
+
                 jwt.sign({ user: req.body.username }, 'secretkey', (err, token) => {
                     res.json({ token, id: user._id });
                 })
