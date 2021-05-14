@@ -49,6 +49,14 @@ router.post('/create', (req, res) => {
     newUser.save() //saves user to mongodb database
         .then(() => res.json('User added!'))
         .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.get('/id/:uid', (req, res) => {
+    User.findById(req.params.uid)
+        .then(user => {
+            res.json({ username: user.username });
+        })
+        .catch(err => console.log(err));
 })
 
 module.exports = router;

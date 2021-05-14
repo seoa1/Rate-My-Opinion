@@ -31,6 +31,12 @@ router.post('/create', (req, res) => {
         })
         .catch(err => res.status(400).json('Error: ' + err));
     
+});
+
+router.post('/delete', (req, res) => {
+    Post.findByIdAndDelete(req.body.id)
+        .then(a => res.json("Post deleted!"))
+        .catch(err => console.log(err));
 })
 
 module.exports = router;
